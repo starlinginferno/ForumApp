@@ -17,7 +17,7 @@ public class PostRestController {
         this.postService = postService;
     }
 
-    @GetMapping("/reddit/statistics")
+    @GetMapping("/statistics")
     public PostDTO listPostsAndCountThem() {
         return postService.listPostsInJson();
     }
