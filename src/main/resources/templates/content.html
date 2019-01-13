@@ -48,12 +48,12 @@
         <tr th:each="comment : ${originalPost.getComments()}" th:object="${comment}">
             <td th:text="*{vote}"></td>
             <td>
-                <form action="#" th:action="'/reddit/' + ${originalPost.getId()} + '/post/up'" method="POST">
+                <form action="#" th:action="'/reddit/' + ${originalPost.getId()} + '/post/' + ${comment.getId()} + '/up'" method="POST">
                     <input type="submit" value="+" th:field="*{vote}" />
                 </form>
             </td>
             <td>
-                <form action="#" th:action="'/reddit/' + ${originalPost.getId()} + '/post/down'" method="POST">
+                <form action="#" th:action="'/reddit/' + ${originalPost.getId()} + '/post/' + ${comment.getId()} + '/down'" method="POST">
                     <input th:type="submit" value="-" th:field="*{vote}" />
                 </form>
             </td>
