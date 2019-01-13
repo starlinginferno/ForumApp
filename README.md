@@ -1,1 +1,1 @@
-[Try it out here!](https://lilisforumapp.herokuapp.com/reddit/)
+[Try it out here!](https://lilisforumapp.herokuapp.com/)
