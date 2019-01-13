@@ -6,7 +6,7 @@
     <title>Edit task</title>
 </head>
 <body>
-<form action="#" th:object="${postToEdit}" th:action="'/reddit/' + *{id} + '/edit'" method="POST" class="form-inline">
+<form action="#" th:object="${postToEdit}" th:action="'/' + *{id} + '/edit'" method="POST" class="form-inline">
     <label for="title">Title</label>
     <input th:type="text" id="title" th:field="*{title}" required autofocus/>
     <label for="content">Content</label>

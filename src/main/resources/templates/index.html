@@ -31,26 +31,26 @@
         <tr th:each="postItem : ${posts}" th:object="${postItem}">
             <td th:text="*{vote}"></td>
             <td>
-                <form action="#" th:action="'/reddit/' + *{id} + '/up'" method="POST">
+                <form action="#" th:action="'/' + *{id} + '/up'" method="POST">
                     <input type="submit" value="+" th:field="*{vote}" />
                 </form>
             </td>
             <td>
-                <form action="#" th:action="'/reddit/' + *{id} + '/down'" method="POST">
+                <form action="#" th:action="'/' + *{id} + '/down'" method="POST">
                     <input th:type="submit" value="-" th:field="*{vote}" />
                 </form>
             </td>
-            <td> <a th:href="'/reddit/' + *{id} + '/post'" th:text="*{title}"></a></td>
+            <td> <a th:href="'/' + *{id} + '/post'" th:text="*{title}"></a></td>
             <td th:text="*{createdAt}"></td>
-            <td> <form action="#" th:action="'/reddit/' + *{id} + '/delete'" method="POST">
+            <td> <form action="#" th:action="'/' + *{id} + '/delete'" method="POST">
                 <p><input th:type="submit" value="delete" class="btn btn-danger" /></p></form>
-                <br><a th:href="'/reddit/' + *{id} + '/edit'" class="btn btn-primary">Edit</a></td>
+                <br><a th:href="'/' + *{id} + '/edit'" class="btn btn-primary">Edit</a></td>
         </tr>
         </tbody>
     </table>
 </div>
 <div>
-    <a th:href="'/reddit/statistics'">API</a>
+    <a th:href="'/statistics'">API</a>
 </div>
 <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>

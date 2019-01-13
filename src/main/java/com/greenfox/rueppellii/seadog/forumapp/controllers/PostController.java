@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/reddit")
 public class PostController {
 
     private PostService postService;
@@ -39,7 +38,7 @@ public class PostController {
     public String submit(@ModelAttribute(name="postItemObject") Post post) {
         if (!post.getTitle().isEmpty() && !post.getContent().isEmpty()) {
             postService.saveNewPost(post);
-            return "redirect:/reddit/";
+            return "redirect:/";
         } else {
             throw new UnsupportedOperationException("Please fill out the fields!");
         }
@@ -48,19 +47,19 @@ public class PostController {
     @PostMapping("/{postID}/up")
     public String upVotePost(@PathVariable(value="postID") Long id) {
         postService.upVote(id);
-        return "redirect:/reddit/";
+        return "redirect:/";
     }
 
     @PostMapping("/{postID}/down")
     public String downVotePost(@PathVariable(value="postID") Long id) {
         postService.downVote(id);
-        return "redirect:/reddit/";
+        return "redirect:/";
     }
 
     @PostMapping("/{postID}/delete")
     public String deletePost(@PathVariable(value="postID") Long id) {
         postService.deletePostById(id);
-        return "redirect:/reddit/";
+        return "redirect:/";
     }
 
     @GetMapping("/{postID}/edit")
@@ -73,7 +72,7 @@ public class PostController {
     @PostMapping("/{postID}/edit")
     public String editPost(@PathVariable(value="postID") Long id, @ModelAttribute(name="postToEdit") Post post) {
         postService.saveNewPost(post);
-        return "redirect:/reddit/";
+        return "redirect:/";
     }
 
     // Comments
@@ -90,7 +89,7 @@ public class PostController {
     @PostMapping("/{postID}/post/add")
     public String addComment(@PathVariable(value="postID") Long id, @ModelAttribute(name="comment") Comment comment) {
         postService.saveCommentForPost(id, comment);
-        return "redirect:/reddit/{postID}/post";
+        return "redirect:/{postID}/post";
     }
 
     @GetMapping("/{postID}/post/{commentID}/edit")
@@ -99,13 +98,13 @@ public class PostController {
             attributes.addFlashAttribute("commentToEdit", commentService.findComment(commentID));
             // postService.saveCommentForPost(postID, commentService.findComment(commentID));
         }
-        return "redirect:/reddit/{postID}/post";
+        return "redirect:/{postID}/post";
     }
 
     @PostMapping("/{postID}/post/{commentID}/delete")
     public String deleteComment(@PathVariable(value="postID") Long postID, @PathVariable(value="commentID") Long commentID) {
         postService.deleteCommentFromUnderPost(postID, commentID);
-        return "redirect:/reddit/{postID}/post";
+        return "redirect:/{postID}/post";
     }
 
     @PostMapping("/search")
@@ -117,12 +116,12 @@ public class PostController {
     @PostMapping("/{postID}/post/{commentID}/up")
     public String upvoteComment(@PathVariable(value="postID") Long postID, @PathVariable(value="commentID") Long commentID) {
         postService.upvoteComment(postID, commentID);
-        return "redirect:/reddit/{postID}/post";
+        return "redirect:/{postID}/post";
     }
 
     @PostMapping("/{postID}/post/{commentID}/down")
     public String downvoteComment(@PathVariable(value="postID") Long postID, @PathVariable(value="commentID") Long commentID) {
         postService.downvoteComment(postID, commentID);
-        return "redirect:/reddit/{postID}/post";
+        return "redirect:/{postID}/post";
     }
 }

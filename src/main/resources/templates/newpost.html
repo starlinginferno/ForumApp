@@ -7,7 +7,7 @@
 </head>
 <body>
 <div>
-    <form action="#" th:action="@{/reddit/submit}" method="post" th:object="${postItemObject}" class="text-center">
+    <form action="#" th:action="@{/submit}" method="post" th:object="${postItemObject}" class="text-center">
         <label for="title">Title</label>
         <input type="text" id="title" maxlength="255" th:field="*{title}" autofocus>
         <br>
