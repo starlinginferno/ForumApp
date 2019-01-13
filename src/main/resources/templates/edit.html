@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Edit task</title>
+</head>
+<body>
+<form action="#" th:object="${postToEdit}" th:action="'/reddit/' + *{id} + '/edit'" method="POST" class="form-inline">
+    <label for="title">Title</label>
+    <input th:type="text" id="title" th:field="*{title}" required autofocus/>
+    <label for="content">Content</label>
+    <textarea id="content" th:field="*{content}" required></textarea>
+    <input th:type="hidden" th:field="*{id}"/>
+    <input th:type="hidden" th:field="*{vote}"/>
+    <input th:type="submit" th:value="DONE" class="btn btn-primary"/>
+</form>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>

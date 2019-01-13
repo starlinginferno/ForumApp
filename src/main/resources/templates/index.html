@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reddit App</title>
+    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a th:href="@{/reddit/submit}">Submit new post</a>
+</nav>
+<div>
+    <form action="#" th:action="@{/reddit/search}" method="post">
+        <label for="search">Task</label>
+        <input type="text" name="keyword" id="search">
+        <input type="submit" value="SEARCH"/>
+    </form>
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Votes</th>
+            <th>Upvote</th>
+            <th>Downvote</th>
+            <th>Title</th>
+            <th>Date Updated</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="postItem : ${posts}" th:object="${postItem}">
+            <td th:text="*{vote}"></td>
+            <td>
+                <form action="#" th:action="'/reddit/' + *{id} + '/up'" method="POST">
+                    <input type="submit" value="+" th:field="*{vote}" />
+                </form>
+            </td>
+            <td>
+                <form action="#" th:action="'/reddit/' + *{id} + '/down'" method="POST">
+                    <input th:type="submit" value="-" th:field="*{vote}" />
+                </form>
+            </td>
+            <td> <a th:href="'/reddit/' + *{id} + '/post'" th:text="*{title}"></a></td>
+            <td th:text="*{createdAt}"></td>
+            <td> <form action="#" th:action="'/reddit/' + *{id} + '/delete'" method="POST">
+                <p><input th:type="submit" value="delete" class="btn btn-danger" /></p></form>
+                <br><a th:href="'/reddit/' + *{id} + '/edit'" class="btn btn-primary">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>

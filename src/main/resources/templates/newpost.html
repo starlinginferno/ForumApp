@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit new post</title>
+    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div>
+    <form action="#" th:action="@{/reddit/submit}" method="post" th:object="${postItemObject}" class="text-center">
+        <label for="title">Title</label>
+        <input type="text" id="title" maxlength="255" th:field="*{title}" autofocus>
+        <br>
+        <label for="txtBox">Post</label>
+        <textarea id="txtBox" rows="9" cols="100" maxlength="1000" placeholder="Type your post here (max 1000 characters)" th:field="*{content}"></textarea>
+        <button type="submit" class="btn btn-primary">SUBMIT</button>
+    </form>
+</div>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>

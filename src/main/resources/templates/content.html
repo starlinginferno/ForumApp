@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <title>Post</title>
+</head>
+<body>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Votes</th>
+            <th>Upvote</th>
+            <th>Downvote</th>
+            <th>Post</th>
+            <th>Date Updated</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:object="${originalPost}">
+            <td th:text="*{vote}"></td>
+            <td>
+                <form action="#" th:action="'/reddit/' + *{id} + '/up'" method="POST">
+                    <input type="submit" value="+" th:field="*{vote}" />
+                </form>
+            </td>
+            <td>
+                <form action="#" th:action="'/reddit/' + *{id} + '/down'" method="POST">
+                    <input th:type="submit" value="-" th:field="*{vote}" />
+                </form>
+            </td>
+            <td th:text="*{content}"></td>
+            <td th:text="*{createdAt}"></td>
+            <td> <form action="#" th:action="'/reddit/' + *{id} + '/delete'" method="POST">
+                <p><input th:type="submit" value="delete" class="btn btn-danger" /></p></form>
+                <br><a th:href="'/reddit/' + *{id} + '/edit'" class="btn btn-primary">Edit</a></td>
+        </tr>
+        <tr class="font-weight-bold">
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Comments</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="comment : ${originalPost.getComments()}" th:object="${comment}">
+            <td th:text="*{vote}"></td>
+            <td>
+                <form action="#" th:action="'/reddit/' + ${originalPost.getId()} + '/post/up'" method="POST">
+                    <input type="submit" value="+" th:field="*{vote}" />
+                </form>
+            </td>
+            <td>
+                <form action="#" th:action="'/reddit/' + ${originalPost.getId()} + '/post/down'" method="POST">
+                    <input th:type="submit" value="-" th:field="*{vote}" />
+                </form>
+            </td>
+            <td th:text="*{content}"></td>
+            <td th:text="*{createdAt}"></td>
+            <td> <form action="#" th:action="'/reddit/' + ${originalPost.getId()} + '/post/' + ${comment.getId()} + '/delete'" method="POST">
+                <!--<input th:type="hidden" th:name="commentId" th:field="*{id}"/>-->
+                <p><input th:type="submit" value="delete" class="btn btn-danger" /></p></form>
+                <a th:href="'/reddit/' + ${originalPost.getId()} + '/post/' + ${comment.getId()} + '/edit'">
+                    <p><input th:type="submit" value="edit" class="btn btn-primary" /></p></a>
+                <!--<br><a th:href="'/reddit/' + ${originalPost.getId()} + '/post/' + ${comment.getId()} + '/edit'" class="btn btn-primary">Edit</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="text-center">
+    <form action="#" th:action="'/reddit/' + ${originalPost.getId()} + '/post/add'" method="post" th:object="${commentToEdit}">
+        <input hidden th:field="*{id}">
+        <label for="txtBox">Add comment</label><br>
+        <textarea id="txtBox" rows="9" cols="50" maxlength="1000" placeholder="Type your comment here" th:field="*{content}" required></textarea>
+        <button type="submit" class="btn btn-primary">SUBMIT</button>
+    </form>
+</div>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>
