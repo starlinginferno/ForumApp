@@ -120,7 +120,7 @@ public class PostController {
         return "redirect:/reddit/{postID}/post";
     }
 
-    @PostMapping("/{postID}/post/{commentID}/up")
+    @PostMapping("/{postID}/post/{commentID}/down")
     public String downvoteComment(@PathVariable(value="postID") Long postID, @PathVariable(value="commentID") Long commentID) {
         postService.downvoteComment(postID, commentID);
         return "redirect:/reddit/{postID}/post";

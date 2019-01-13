@@ -84,7 +84,7 @@ public class PostService {
         if (foundMatch) {
             post.getComments().get(match).setVote(post.getComments().get(match).getVote() + 1);
             commentRepository.findById(commentId).get().setPost(post);
-            commentRepository.save(post.getComments().get(match));
+            commentRepository.save(commentRepository.findById(commentId).get());
             postRepository.save(post);
         }
     }
@@ -102,7 +102,7 @@ public class PostService {
         if (foundMatch) {
             post.getComments().get(match).setVote(post.getComments().get(match).getVote() - 1);
             commentRepository.findById(commentId).get().setPost(post);
-            commentRepository.save(post.getComments().get(match));
+            commentRepository.save(commentRepository.findById(commentId).get());
             postRepository.save(post);
         }
     }
