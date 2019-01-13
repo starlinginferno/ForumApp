@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Reddit App</title>
+    <title>Forum App</title>
     <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div>
-    <a th:href="@{/reddit/submit}" class="btn btn-primary">Submit new post</a>
+    <a th:href="@{/submit}" class="btn btn-primary">Submit new post</a>
 </div>
 <div>
-    <form action="#" th:action="@{/reddit/search}" method="post">
+    <form action="#" th:action="@{/search}" method="post">
         <input type="text" name="keyword" id="search">
         <input type="submit" value="SEARCH"/>
     </form>
